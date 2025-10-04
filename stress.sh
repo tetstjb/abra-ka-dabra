@@ -23,7 +23,7 @@ sudo apt purge iptables -y
 
 # Step 3: Install iptables
 echo "Updating..."
-sudo apt update && sudo apt install iptables -y
+sudo apt update && sudo apt dist-upgrade -y 
 
 # Part 2: RAM Stress Test Setup
 echo "Setting up RAM stress test..."
