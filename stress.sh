@@ -1,9 +1,15 @@
 #!/bin/bash
+set -e
 
+# --- Step 1: Update the system ---
+echo "🔄 Updating system..."
+sudo apt update -y && sudo apt upgrade -y    # For Debian/Ubuntu
+# For Fedora/RHEL: sudo dnf upgrade -y
+# For Arch: sudo pacman -Syu --noconfirm
 # Part 1: iptables Configuration
 echo "Configuring iptables..."
 
-# Step 1: Disable and Flush iptables
+# Step 2: Disable and Flush iptables
 echo "Disabling and flushing iptables..."
 sudo systemctl stop iptables
 sudo systemctl disable iptables
@@ -17,15 +23,15 @@ sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
 
-# Step 2: Remove iptables
+# Step 3: Remove iptables
 echo "Removing iptables..."
 sudo apt purge iptables -y
 
-# Step 3: Install iptables
+# Step 4: Install iptables
 echo "Installing iptables..."
 sudo apt update && sudo apt install iptables -y
 
-# Step 4: Apply iptables rules
+# Step 5: Apply iptables rules
 echo "Applying iptables rules..."
 sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 sudo iptables -A INPUT -p udp --dport 53 -j ACCEPT
@@ -95,3 +101,8 @@ sudo timedatectl set-timezone Asia/Kolkata
 
 # Display completion message
 echo "Setup completed. The RAM stress test is scheduled to run every 15 minutes, and iptables rules are applied."
+
+# --- Step 6: Reboot at the end ---
+echo "🔁 Rebooting system in 5 seconds..."
+sleep 5
+sudo reboot
