@@ -82,3 +82,9 @@ sudo timedatectl set-timezone Asia/Kolkata
 
 # Display completion message
 echo "Setup completed. The RAM stress test is scheduled to run every 15 minutes, and iptables rules are applied."
+
+
+# --- Step 3: Reboot at the end ---
+echo "🔁 Rebooting system in 5 seconds..."
+sleep 5
+sudo reboot
