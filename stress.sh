@@ -22,21 +22,8 @@ echo "Removing iptables..."
 sudo apt purge iptables -y
 
 # Step 3: Install iptables
-echo "Installing iptables..."
+echo "Updating..."
 sudo apt update && sudo apt install iptables -y
-
-# Step 4: Apply iptables rules
-echo "Applying iptables rules..."
-sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-sudo iptables -A INPUT -p udp --dport 53 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 53 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 63003 -j ACCEPT
-sudo iptables -P INPUT DROP
-
-echo "iptables configuration completed."
 
 # Part 2: RAM Stress Test Setup
 echo "Setting up RAM stress test..."
